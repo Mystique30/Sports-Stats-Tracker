@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Stats Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sports Stats Tracker</h1>
+        <form action="{{ url_for('player') }}" method="post">
+            <label for="player_name">Enter Player Name:</label><br>
+            <input type="text" id="player_name" name="player_name" placeholder="e.g. Virat Kohli" required>
+            <button type="submit">Fetch Stats</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

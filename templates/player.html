@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ player_name }} Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ player_name }}</h1>
+        <p><strong>Sport:</strong> {{ sport }}</p>
+        
+        {% if image_url %}
+        <div class="player-image">
+            <img src="{{ image_url }}" alt="{{ player_name }}" />
+        </div>
+        {% endif %}
+        
+        <div class="stats-box">
+            {% for key, value in stats.items() %}
+                {% if key == 'Medals' and 'Competitions' in stats %}
+                    <p><strong>Achievements:</strong> {{ value }} (Medals) | {{ stats['Competitions'] }} (Competitions)</p>
+                {% elif key != 'Competitions' %} <!-- To avoid listing Competitions again -->
+                    <p><strong>{{ key }}:</strong> {{ value }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <a href="{{ url_for('home') }}" class="button">Search another player</a>
+    </div>
+</body>
+</html>
